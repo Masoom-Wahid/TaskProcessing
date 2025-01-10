@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .email-container {
+            width: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .email-content {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .otp-code {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-content">
+            <h1>Hello, {{ username }}!</h1>
+            <p>Thank you for signing up. Please use the following OTP to verify your account:</p>
+            <p class="otp-code">{{ otp }}</p>
+            <p>This OTP will expire in 10 minutes.</p>
+        </div>
+        <div class="footer">
+            <p>If you did not request this email, please ignore it.</p>
+        </div>
+    </div>
+</body>
+</html>
+
+
