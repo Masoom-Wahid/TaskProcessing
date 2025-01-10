@@ -11,16 +11,23 @@ from users.tasks import OtpHandler
 from .models import OTP
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
-
+from rest_framework.exceptions import Throttled
+from .throttles import OTPRateThrottle
 
 class RegisterApiView(
     GenericViewSet,
     CreateModelMixin
 ):
+    throttle_classes=[OTPRateThrottle],
     
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
 
+    def throttled(self,request, wait):
+        raise Throttled(detail={
+            "message": "Sabr is a good thing.",
+            "available_in": f"{wait} seconds"
+        })
     def perform_create(self, serializer):
         user = serializer.save()
         user.set_password(serializer.validated_data["password"])
@@ -38,6 +45,16 @@ class RegisterApiView(
 
 
 class VerifyApiView(APIView):
+    throttle_classes = [OTPRateThrottle]
+
+
+    def throttled(self,request, wait):
+        raise Throttled(detail={
+            "message": "Sabr is a good thing.",
+            "available_in": f"{wait} seconds"
+        })
+
+
     @swagger_auto_schema(
         operation_description="Verify user using OTP and return JWT tokens.",
         request_body=OtpSerializer,
