@@ -18,7 +18,7 @@ class RegisterApiView(
     GenericViewSet,
     CreateModelMixin
 ):
-    throttle_classes=[OTPRateThrottle],
+    throttle_classes=[OTPRateThrottle]
     
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
