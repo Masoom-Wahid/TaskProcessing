@@ -37,7 +37,7 @@ urlpatterns = [
     path("api/register/",RegisterApiView.as_view({'post':'create'})),
     path("api/verify-email/",VerifyApiView.as_view()),
     path("api/login/",CustomTokenObtainPairView.as_view()),
-    path("api/dashboard",DashboardApiView.as_view({'get':'list'})),
+    path("api/dashboard/",DashboardApiView.as_view({'get':'list'})),
     path('api/',include(router.urls))
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

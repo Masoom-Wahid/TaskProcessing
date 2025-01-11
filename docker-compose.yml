@@ -35,6 +35,7 @@ services:
     command: celery -A task_processor worker --loglevel=info
     environment:
       - REDIS_HOST=redis://redis:6379/0
+      - POSTGRES_HOST=db
       - SETTINGS_MODULE=task_processor.settings_prod
     env_file:
       - .env
